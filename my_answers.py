@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -43,11 +44,18 @@ def cleaned_text(text):
         text = text.replace(p, ' ')
     return text
 
-### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
+### DONE: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):
     # containers for input/output pairs
     inputs = []
     outputs = []
+
+    windows_count = math.floor((len(text) - window_size) / step_size)
+    for i in range(windows_count):
+        idx_start = i * step_size
+        idx_end = idx_start + window_size
+        inputs.append(text[idx_start:idx_end])
+        outputs.append(text[idx_end + 1])
 
     return inputs,outputs
 
