@@ -40,8 +40,15 @@ def build_part1_RNN(window_size):
 
 ### DONE: return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
-    regex = re.compile('[^a-zA-Z!,.:;?]')
-    return regex.sub(' ', text)
+    unique_chars = set(text)
+    allowed_chars = {'a','b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        ' ', '!', ',', '.', ':', ';', '?'}
+    to_remove = unique_chars - allowed_chars
+
+    for r in to_remove:
+        text = text.replace(r, ' ')
+    return text
 
 
 ### DONE: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
