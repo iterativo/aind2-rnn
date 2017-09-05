@@ -44,6 +44,7 @@ def cleaned_text(text):
         text = text.replace(p, ' ')
     return text
 
+
 ### DONE: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):
     # containers for input/output pairs
@@ -59,7 +60,11 @@ def window_transform_text(text, window_size, step_size):
 
     return inputs,outputs
 
-# TODO build the required RNN model:
+
+# DONE build the required RNN model:
 # a single LSTM hidden layer with softmax activation, categorical_crossentropy loss
 def build_part2_RNN(window_size, num_chars):
-    pass
+    model = Sequential()
+    model.add(LSTM(200, input_shape=(window_size, num_chars)))
+    model.add(Dense(num_chars, activation='softmax'))
+    return model
